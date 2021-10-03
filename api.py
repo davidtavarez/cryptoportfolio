@@ -3,24 +3,13 @@
 from flask import Flask, jsonify
 
 from constants import CURRENCY, PORTFOLIO_FILE_PATH
-from functions import check_settings, get_sheet, get_summary, load_portfolio
+from functions import (
+    check_settings,
+    get_sheet,
+    get_summary,
+)
 
 app = Flask(__name__)
-
-
-@app.route("/", methods=["GET"])
-def home():
-    return "<h1>Hello Crypto World!</h1>"
-
-
-@app.route("/api/v1/coins", methods=["GET"])
-def coins():
-    portfolio = load_portfolio(PORTFOLIO_FILE_PATH)
-    keys = portfolio.keys()
-    keys_list = list(keys)
-    sorted_list_keys = sorted(keys_list)
-
-    return jsonify(sorted_list_keys)
 
 
 @app.route("/api/v1/sheet", methods=["GET"])
